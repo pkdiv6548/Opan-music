@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#151515">
+<meta name="description" content="OpenBeat — premium audiophile music discovery and player.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./favicon.ico">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<title>OpenBeat — Audiophile Music Player</title>
+</head>
+<body>
+<div id="app">
+  <div class="app-bg"></div>
+  <aside id="sidebar" class="sidebar">
+    <div class="brand"><div class="brand-mark">♫</div><div><b>OPENBEAT</b><small>Audiophile Player</small></div></div>
+    <button id="closeSidebar" class="icon-btn mobile-only">×</button>
+    <nav class="nav">
+      <button class="nav-item active" data-tab="home">⌂ <span>Home</span></button>
+      <button class="nav-item" data-tab="explore">◈ <span>Explore</span></button>
+      <button class="nav-item" data-tab="search">⌕ <span>Search</span></button>
+      <button class="nav-item" data-tab="library">▣ <span>Library</span></button>
+      <button class="nav-item" data-tab="liked">♡ <span>Liked Songs</span></button>
+      <button class="nav-item" data-tab="local">▧ <span>Local Music</span></button>
+    </nav>
+    <div class="side-label">GENRES</div>
+    <div id="genres"></div>
+    <div class="sidebar-card">
+      <span class="eyebrow">OPENBEAT PWA</span>
+      <b>Install the full player</b>
+      <p>Fast launch, media controls and an app-like experience.</p>
+      <button id="installBtn" class="primary small">Install App</button>
+    </div>
+    <button id="settingsBtn" class="settings-link">⚙ Settings</button>
+  </aside>
+
+  <div class="content-shell">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn mobile-only">☰</button>
+      <form id="searchForm" class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Search songs, artists, albums..." autocomplete="off"><button>Search</button></form>
+      <div class="top-actions"><button id="themeBtn" class="round-btn" title="Toggle theme">◐</button><button id="openPlayerBtn" class="round-btn">◉</button></div>
+    </header>
+
+    <main id="mainScroll">
+      <section id="home" class="view active-view">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="badges"><span class="pill">✦ FEATURED MASTER RELEASE</span><span class="pill muted">24-BIT / 96KHZ</span></div>
+            <h1 id="heroTitle">Midnight Resonance</h1>
+            <p class="hero-sub">by <strong id="heroArtist">Aura Sound Lab</strong> · <span id="heroAlbum">Atmospheres Vol. 1</span></p>
+            <p class="hero-desc">Immerse yourself in a premium charcoal audiophile interface with precision playback, equalizer presets, queue control and background-ready audio.</p>
+            <div class="specs"><span>FLAC · 320kbps</span><span>Studio EQ Active</span><span>Background Playback Ready</span></div>
+            <div class="hero-actions"><button id="heroPlay" class="primary">▶ <span>Play Master Release</span></button><button id="heroQueue" class="secondary">Add to Queue</button><button id="heroExplore" class="secondary">Browse All →</button></div>
+          </div>
+          <div id="heroArt" class="hero-art"><img id="heroThumb" src="./assets/images/openbeat-default.svg" alt="Featured artwork"><div class="art-overlay"><div class="eq"><i></i><i></i><i></i><i></i><i></i></div><span id="heroState">MASTER</span></div></div>
+        </div>
+
+        <section class="section"><div class="section-head"><div><span class="eyebrow">PERSONALIZED</span><h2>Quick picks</h2></div><button class="ghost" data-refresh="popular music">Refresh</button></div><div id="quickGrid" class="track-grid"></div></section>
+        <section class="section"><div class="section-head"><div><span class="eyebrow">DISCOVER</span><h2>Chill & Focus</h2></div><button class="ghost" data-query="chill focus music">Explore</button></div><div id="chillGrid" class="track-grid"></div></section>
+        <section class="section"><div class="section-head"><div><span class="eyebrow">CURATED</span><h2>Made for you</h2></div><button class="ghost" data-query="trending music">Refresh</button></div><div id="madeGrid" class="track-grid"></div></section>
+      </section>
+
+      <section id="explore" class="view"><div class="page-head"><div><span class="eyebrow">EXPLORE</span><h1>Find your sound</h1><p>Search YouTube music through your secure serverless API.</p></div></div><div id="exploreGrid" class="track-grid"></div></section>
+
+      <section id="search" class="view"><div class="page-head"><div><span class="eyebrow">SEARCH</span><h1 id="searchTitle">Search</h1><p id="searchStatus">Find your next track.</p></div><button id="clearHistory" class="ghost">Clear history</button></div><div id="searchGrid" class="track-grid"></div></section>
+
+      <section id="library" class="view"><div class="page-head"><div><span class="eyebrow">LIBRARY</span><h1>Your library</h1><p>Liked songs and recently played tracks.</p></div></div><div class="library-tabs"><button class="tab-btn active" data-lib="liked">Liked</button><button class="tab-btn" data-lib="recent">Recent</button></div><div id="libraryGrid" class="track-grid"></div></section>
+
+      <section id="liked" class="view"><div class="page-head"><div><span class="eyebrow">FAVORITES</span><h1>Liked songs</h1><p>Your saved collection.</p></div></div><div id="likedGrid" class="track-grid"></div></section>
+
+      <section id="local" class="view"><div class="page-head"><div><span class="eyebrow">LOCAL AUDIO</span><h1>Local music</h1><p>Play audio files stored on this device.</p></div><label class="secondary file-label">＋ Add audio<input id="localFiles" type="file" accept="audio/*" multiple hidden></label></div><div id="localGrid" class="track-grid"></div></section>
+    </main>
+
+    <footer id="miniPlayer" class="mini-player">
+      <div class="mini-track" id="miniOpen"><div class="mini-art"><img id="miniThumb" src="./assets/images/openbeat-default.svg"></div><div class="mini-meta"><b id="miniTitle">Choose a song</b><span id="miniArtist">OpenBeat</span></div></div>
+      <button id="miniLike" class="player-btn">♡</button>
+      <div class="mini-controls"><button id="prevBtn" class="player-btn">|◀</button><button id="playBtn" class="play-main">▶</button><button id="nextBtn" class="player-btn">▶|</button></div>
+      <div class="mini-progress"><span id="timeNow">0:00</span><input id="seek" type="range" min="0" max="100" value="0"><span id="timeEnd">0:00</span></div>
+      <div class="mini-tools"><button id="shuffleBtn" class="player-btn">⤨</button><button id="repeatBtn" class="player-btn">↻</button><button id="muteBtn" class="player-btn">🔊</button><input id="volume" type="range" min="0" max="100" value="85"><button id="queueBtn" class="player-btn">☷</button></div>
+    </footer>
+    <nav class="mobile-nav"><button data-tab="home">⌂<span>Home</span></button><button data-tab="search">⌕<span>Search</span></button><button data-tab="library">▣<span>Library</span></button><button data-tab="liked">♡<span>Liked</span></button></nav>
+  </div>
+
+  <aside id="queuePanel" class="queue-panel"><div class="panel-head"><div><span class="eyebrow">PLAYER QUEUE</span><b>Up Next <span id="queueCount">0</span></b></div><button id="closeQueue" class="icon-btn">×</button></div><div id="queueList"></div></aside>
+
+  <div id="playerModal" class="modal hidden"><div class="expanded-player"><button id="closePlayer" class="close-player">×</button><div class="expanded-left"><div id="expandedArt" class="expanded-art"><img id="bigThumb" src="./assets/images/openbeat-default.svg"><div class="visualizer" aria-label="Now playing visualizer"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="expanded-meta"><h2 id="bigTitle">Choose a song</h2><p id="bigArtist">OpenBeat</p></div><div class="expanded-seek"><div class="seekline"><div id="seekFill"></div></div><div><span id="bigTime">0:00</span><span id="bigRemain">-0:00</span></div></div><div class="expanded-controls"><button id="bigShuffle">⤨</button><button id="bigPrev">|◀</button><button id="bigPlay" class="big-play">▶</button><button id="bigNext">▶|</button><button id="bigRepeat">↻</button></div></div><div class="expanded-right"><div class="panel-head"><b>PLAYBACK</b><button id="openLyrics" class="secondary small">Lyrics</button></div><div id="ytPlayer" class="youtube-box"></div><div class="audio-note">YouTube playback is embedded for discovery. Local/stream audio uses the HTML5 Media Session pipeline for background-capable playback.</div><div class="settings-grid"><label>Playback speed<select id="speed"><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select></label><label>Equalizer<select id="eqPreset"><option value="flat">Flat</option><option value="bass">Bass Boost</option><option value="treble">Treble Boost</option><option value="vocal">Vocal Clarity</option><option value="electronic" selected>Electronic</option><option value="rock">Rock</option><option value="classical">Classical</option></select></label></div></div></div></div>
+
+  <div id="settingsModal" class="modal hidden"><div class="settings-modal"><button id="closeSettings" class="close-player">×</button><div class="eyebrow">SETTINGS & AUDIO ENGINE</div><h2>Playback settings</h2><p class="muted-text">Configure PWA install, background playback, equalizer and API behavior.</p><label class="setting-row"><span>Background playback</span><input id="bgPlayback" type="checkbox" checked></label><label class="setting-row"><span>Keep screen awake</span><input id="wakeLock" type="checkbox"></label><label class="setting-row"><span>Equalizer</span><select id="settingsEq"><option value="flat">Flat</option><option value="bass">Bass Boost</option><option value="treble">Treble Boost</option><option value="vocal">Vocal Clarity</option><option value="electronic" selected>Electronic</option><option value="rock">Rock</option><option value="classical">Classical</option></select></label><button id="saveSettings" class="primary">Save Settings</button><div class="api-note"><b>YouTube API</b><p>Use <code>YOUTUBE_API_KEY</code> as a Vercel Environment Variable. The frontend calls <code>/api/search?q=...</code>; the key is never shipped in browser code.</p></div></div></div>
+
+  <div id="videoModal" class="modal hidden"><div class="video-modal"><button id="closeVideo" class="close-player">×</button><div id="videoFrame"></div></div></div>
+  <div id="lyricsModal" class="modal hidden"><div class="lyrics-modal"><button id="closeLyrics" class="close-player">×</button><div class="eyebrow">LYRICS</div><h2 id="lyricsTitle">Lyrics</h2><div id="lyricsText" class="lyrics-text">Lyrics are supplied by the selected track when available.</div></div></div>
+  <div id="toast"></div>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
